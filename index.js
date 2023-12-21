@@ -35,9 +35,8 @@ const generateLink = async () => {
     };
 
     const interval = setInterval(() => {
-        const stats = pool.stats();
         console.log(`Generated ${links.length}/${linkAmount} (${(links.length / linkAmount * 100).toFixed(2)}%) promo links`);
-        if (stats.totalWorkers === stats.idleWorkers) {
+        if (links.length >= linkAmount) {
             console.log("Done!");
             writeFileSync("links.txt", links.join("\n"));
             pool.terminate();
